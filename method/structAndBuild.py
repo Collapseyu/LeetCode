@@ -58,8 +58,29 @@ class TreeStruct_process:
                 return x.val
             else:
                 return x
-        print(list(map(print_judge,tree_node_list)))
-        return
+        res = list(map(print_judge,tree_node_list))
+        print(res)
+        return res
+    def show_uncomplete_val_list(self,node):
+        res = []
+        queue = [node]
+        last_index = 0
+        while len(queue)>0:
+            tmp = queue[0]
+
+            del queue[0]
+            if tmp == None:
+                res.append('null')
+                continue
+            else:
+                exist_flag = True
+                res.append(tmp.val)
+                last_index = len(res)
+                queue.append(tmp.left)
+                queue.append(tmp.right)
+
+
+        return res[:last_index]
     def frontOrder(self,root):
         res = []
         def dfs(node):
@@ -96,6 +117,7 @@ class TreeStruct_process:
             return
         dfs(root)
         return res
+    
 class listNode_struct:
     def __init__(self):
         pass
@@ -108,5 +130,12 @@ class listNode_struct:
             ptr.next = ListNode(val_list[i])
             ptr = ptr.next
         return list_example
+    def list_show(self,node_list):
+        #todo list_show方法现在没有考虑循环列表
+        res = []
+        while(node_list):
+            res.append(node_list.val)
+            node_list = node_list.next
+        return res
     
 
